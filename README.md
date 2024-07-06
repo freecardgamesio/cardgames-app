@@ -170,8 +170,6 @@ Installation
 
 (Coming Soon)
 
-[GitHub Pages](https://freecardgames.io/)
-
 
 Special Notes for Advanced Users
 =====================
