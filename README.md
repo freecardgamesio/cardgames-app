@@ -12,7 +12,6 @@ Free Card Games
 ===================
 
 What is Free Card Games? Card Games is a gaming client application that allows users single-click access to download and install free games. For more information, visit http://github.com/freecardgamesio/cardgames-app/wiki/
-https://freecardgames.io/
 
 This is the OFFICIAL Card Games project, which is the open source project that the commercially maintained Card Games Client Application product is built and distributed from. If you have followed the history of the Card Games Client App project, there is also "Cardium" which can be built for private use and experimentation with new features and/or fixes that you may want to contribute at some point. 
 
