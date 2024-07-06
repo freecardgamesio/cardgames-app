@@ -14,7 +14,7 @@ clean() {
 	echo 'Cleaned'
 }
 
-build_desura() {
+build_cardgames() {
 	if [ ! -d "build" ]; then
 		mkdir build
 	fi
@@ -25,7 +25,7 @@ build_desura() {
 #	make V=1 -j${NUM_PROC} install $@
 	make -j${NUM_PROC} install $@
 	cd ..
-	echo 'Building Desura completed'
+	echo 'Building CardGames completed'
 }
 
 build_cef() {
@@ -46,21 +46,21 @@ pack() {
 		mkdir build_package
 	fi
 	cd build_package
-	cmake .. -DPACKAGE_TYPE=$PACKAGE -DINSTALL_DESKTOP_FILE=ON -DCMAKE_INSTALL_PREFIX="/opt/desura" -DDESKTOP_EXE="/opt/desura/desura" -DDESKTOP_ICON="/opt/desura/desura.png" -DOFFICIAL_BUILD=$OFFICIAL_BUILD -DFORCE_BUNDLED_WXGTK=$OFFICIAL_BUILD -DFORCE_BUNDLED_BOOST=$OFFICIAL_BUILD -DFORCE_BUNDLED_CURL=$OFFICIAL_BUILD || exit 1
+	cmake .. -DPACKAGE_TYPE=$PACKAGE -DINSTALL_DESKTOP_FILE=ON -DCMAKE_INSTALL_PREFIX="/opt/cardgames" -DDESKTOP_EXE="/opt/cardgames/cardgames" -DDESKTOP_ICON="/opt/cardgames/cardgames.png" -DOFFICIAL_BUILD=$OFFICIAL_BUILD -DFORCE_BUNDLED_WXGTK=$OFFICIAL_BUILD -DFORCE_BUNDLED_BOOST=$OFFICIAL_BUILD -DFORCE_BUNDLED_CURL=$OFFICIAL_BUILD || exit 1
 	NUM_PROC=`nproc`
 	echo "${NUM_PROC} processors detected"
 	make -j${NUM_PROC} package $@
 	if [ $PACKAGE = "DEB" ]; then
-		mv Desura-*.deb ..
+		mv CardGames-*.deb ..
 	elif [ $PACKAGE = "RPM" ]; then
-		mv Desura-*.rpm ..
+		mv CardGames-*.rpm ..
 	fi
 	echo 'Building $PACKAGE completed'
 	cd ..
 }
 
 if [ -z "$1" ]; then
-	build_desura || exit 2
+	build_cardgames || exit 2
 	build_cef || exit 2
 elif [ "$1" = "clean" ]; then
 	shift
@@ -76,22 +76,22 @@ elif [ "$1" = "release" ]; then
 	OFFICIAL_BUILD="ON"
 	shift
 	pack || exit 2
-elif [ "$1" = "only_desura" ]; then
+elif [ "$1" = "only_cardgames" ]; then
 	shift
-	build_desura || exit 2
+	build_cardgames || exit 2
 elif [ "$1" = "only_cef" ]; then
 	shift
 	build_cef || exit 2
 elif [ "$1" = "help" ]; then
-	echo 'This script will allow you to easy compile Desura on Linux.'
-	echo 'Type "./build_desura.sh clean" to remove build files.'
-	echo 'Type "./build_desura.sh" to build Desura client.'
-	echo 'Type "./build_desura.sh pack DEB" to prepare .deb package.'
-	echo 'Type "./build_desura.sh pack RPM" to prepare .rpm package.'
-	echo 'Type "./build_desura.sh only_desura" to compile Desura without CEF(Chormium Embedded Framework).'
-	echo 'Type "./build_desura.sh only_cef" to compile CEF without Desura.'
-	echo 'Type "./build_desura.sh help" to display this message.'
+	echo 'This script will allow you to easy compile Card Games on Linux.'
+	echo 'Type "./build_cardgames.sh clean" to remove build files.'
+	echo 'Type "./build_cardgames.sh" to build Card Games client.'
+	echo 'Type "./build_cardgames.sh pack DEB" to prepare .deb package.'
+	echo 'Type "./build_cardgames.sh pack RPM" to prepare .rpm package.'
+	echo 'Type "./build_cardgames.sh only_cardgames" to compile Card Games without CEF(Chormium Embedded Framework).'
+	echo 'Type "./build_cardgames.sh only_cef" to compile CEF without Card Games.'
+	echo 'Type "./build_cardgames.sh help" to display this message.'
 	echo 'Any additonal shell argument will be given to "make" command.\n'
 fi
 
-echo 'Run \033[1;31m./install/desura\033[0m to start Desura!'
+echo 'Run \033[1;31m./install/cardgames\033[0m to start Card Games!'
