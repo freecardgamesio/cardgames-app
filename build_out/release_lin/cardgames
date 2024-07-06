@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Desura launch script
-# Email any suggestions or improvements to mark@desura.com
+# Card Games launch script
+# Email any suggestions or improvements to mark@freecardgames.io
 
 # Initialise variables if need be
 ARGS=""
@@ -10,7 +10,7 @@ ARCH="$(uname -m)"
 CONSOLE="false"
 BIT=""
 
-# Move into the Desura directory, moving to the backup dir first
+# Move into the Card Games directory, moving to the backup dir first
 if [ x"$1" != x"--debug" ]; then
 	cd "`dirname "$0"`"
 	cd "`dirname "$(readlink -f "$0")"`"
@@ -46,7 +46,7 @@ if [ -e "version" ]; then
 fi
 
 if [ -z $BIT ]; then
-	BUILD=`file ./bin/desura | grep 64-bit`
+	BUILD=`file ./bin/cardgames | grep 64-bit`
 
 	if [ -n "$BUILD" ]; then
 		BIT="64"
@@ -70,25 +70,25 @@ function error()
 	echo "$MSG" >&2
 	
 	# Try using zenity (nearly all GTK systems)
-	zenity --error --title="Desura" --text="$MSG"
+	zenity --error --title="Card Games" --text="$MSG"
 	if [ "$?" -ne 127 ]; then
 		return
 	fi
 
 	# Try using kdialog (nearly all KDE systems)
-	kdialog --title "Desura" --error "$MSG"
+	kdialog --title "Card Games" --error "$MSG"
 	if [ "$?" -ne 127 ]; then
 		return
 	fi
 
 	# Try using gxmessage (some lightweight GTK systems)
-	gxmessage -wrap -title "Desura" -center -buttons GTK_STOCK_OK -default OK "$MSG"
+	gxmessage -wrap -title "Card Games" -center -buttons GTK_STOCK_OK -default OK "$MSG"
 	if [ "$?" -ne 127 ]; then
 		return
 	fi
 
 	# Try using gxmessage (some lightweight GTK systems)
-	gmessage -wrap -title "Desura" -center -buttons GTK_STOCK_OK -default OK "$MSG"
+	gmessage -wrap -title "Card Games" -center -buttons GTK_STOCK_OK -default OK "$MSG"
 	if [ "$?" -ne 127 ]; then
 		return
 	fi
@@ -131,46 +131,46 @@ function installDesktopShortcut()
 	xdg/xdg-desktop-menu install --novendor --mode user $1.desktop
 }
 
-function genDesuraDS()
+function genCardGamesDS()
 {
 	DIR=$(echo $PWD | sed 's/ /\\ /g')
 
 # Generate a new one
-cat << EOM > desura.desktop
+cat << EOM > cardgames.desktop
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Desura
+Name=Card Games
 GenericName=Game Manager
 Comment=Download and play the best games
-Exec=$DIR/desura %U
-TryExec=$PWD/bin/desura
+Exec=$DIR/cardgames %U
+TryExec=$PWD/bin/cardgames
 Path=$PWD
-MimeType=x-scheme-handler/desura;
-Icon=$PWD/data/desura.png
+MimeType=x-scheme-handler/cardgames;
+Icon=$PWD/data/cardgames.png
 Terminal=false
 Categories=Game
 StartupNotify=false
 EOM
 }
 
-function genDesuraForceDS()
+function genCardGamesForceDS()
 {
 	DIR=$(echo $PWD | sed 's/ /\\ /g')
 
-cat << EOM > desura-force.desktop
+cat << EOM > cardgames-force.desktop
 #!/usr/bin/env xdg-open
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Desura (Force Update)
+Name=Card Games (Force Update)
 GenericName=Game Manager
-Comment=Force Desura to update itself
-Exec=$DIR/desura -f
-TryExec=$PWD/bin/desura
+Comment=Force Card Games to update itself
+Exec=$DIR/cardgames -f
+TryExec=$PWD/bin/cardgames
 Path=$PWD
-Icon=$PWD/data/desura.png
+Icon=$PWD/data/cardgames.png
 Terminal=true
 Categories=Game
 StartupNotify=false
@@ -179,17 +179,17 @@ EOM
 
 # Check that they are using the correct version
 if [ x"$BIT" == x"32" -a x"$ARCH" == x"x86_64" -a ! -e .ignore_bits ]; then
-	error "You are using the i686 version of Desura when you should be using the x86_64 version. Functionality may not be as expected.\n\nIf you would like to ignore this warning, just create an empty file called .ignore_bits in your Desura directory.\n\nPlease see http://www.desura.com to download the correct version"
+	error "You are using the i686 version of Card Games when you should be using the x86_64 version. Functionality may not be as expected.\n\nIf you would like to ignore this warning, just create an empty file called .ignore_bits in your Desura directory.\n\nPlease see http://www.desura.com to download the correct version"
 fi
 
 CARIO_TEST=`readelf -Ws /usr/lib/libcairo.so | awk '/cairo_(gl|qt)_surface/' | wc -l`
 
 if [ x"$CARIO_TEST" == x"1" -a ! -e .ignore_cariotest ]; then
-	error "Looks like you have cario built with incompatiable flags that cause Desura to crash.\n\nIf you would like to ignore this warning, just create an empty file called .ignore_cariotest in your Desura directory.\n\nPlease see http://www.desura.com/groups/desura/forum/thread/gentoo-crash-on-login for more help"
+	error "Looks like you have cario built with incompatiable flags that cause Card Games to crash.\n\nIf you would like to ignore this warning, just create an empty file called .ignore_cariotest in your Card Games directory.\n\nPlease see http://www.desura.com/groups/desura/forum/thread/gentoo-crash-on-login for more help"
 fi
 
 # Check for missing libs
-MISSING_LIBS=$(ldd "lib/libcef_desura.so" 2> /dev/null |grep "not found$" | cut -d" " -f 1|sed 's/\t//')
+MISSING_LIBS=$(ldd "lib/libcef_cardgames.so" 2> /dev/null |grep "not found$" | cut -d" " -f 1|sed 's/\t//')
 
 # Resolve any missing (old name) libs
 echo $MISSING_LIBS | grep -qs libbz2.so.1.0
@@ -239,7 +239,7 @@ export LC_ALL="C"
 while [ $# -gt 0 ]; do
 	if [ x"$1" = x"--gdb" -o x"$1" = x"-g" ]; then
 		GDB="true"
-		ARGS="$ARGS $1" # (Desura needs to know if it's running w/ GDB)
+		ARGS="$ARGS $1" # (Card Games needs to know if it's running w/ GDB)
 	elif [ x"$1" = x"--console" ]; then
 		CONSOLE="true"
 	else
@@ -257,45 +257,45 @@ fi
 
 
 if [ -e ".ignore_force_shortcut" ]; then
-	removeDesktopShortcut "desura-force"
+	removeDesktopShortcut "cardgames-force"
 fi
 
 if [ -e ".ignore_shortcut" ]; then
-	removeDesktopShortcut "desura"
+	removeDesktopShortcut "cardgames"
 fi
 
 FORCECREATE="false"
 
-if [ ! -e ".ignore_force_shortcut" -a ! -e "desura-force.desktop" ]; then
+if [ ! -e ".ignore_force_shortcut" -a ! -e "cardgames-force.desktop" ]; then
 	FORCECREATE="true"
 fi
 
-if [ ! -e ".ignore_shortcut" -a ! -e "desura.desktop" ]; then
+if [ ! -e ".ignore_shortcut" -a ! -e "cardgames.desktop" ]; then
 	FORCECREATE="true"
 fi
 
 if [ x"$LASTDIR" != x"$PWD" -o x"$FORCECREATE" == x"true" ]; then
 
-	removeDesktopShortcut "desura"
-	removeDesktopShortcut "desura-force"
+	removeDesktopShortcut "cardgames"
+	removeDesktopShortcut "cardgames-force"
 
 	if [ ! -e ".ignore_shortcut" ]; then
-		genDesuraDS
-		installDesktopShortcut "desura"
+		genCardGamesDS
+		installDesktopShortcut "cardgames"
 	fi
 
 	if [ ! -e ".ignore_force_shortcut" ]; then
-		genDesuraForceDS
-		installDesktopShortcut "desura-force"
+		genCardGamesForceDS
+		installDesktopShortcut "cardgames-force"
 	fi
 
 	echo $PWD > .last_install_dir
 fi
 
-# If --gdb was passed, run Desura with gdb, passing any other args
+# If --gdb was passed, run Card Games with gdb, passing any other args
 if [ x"$GDB" = x"true" ]; then
-	echo "set follow-fork-mode child" > /tmp/desura-gdb-commands
-	exec gdb -x /tmp/desura-gdb-commands --args bin/desura $ARGS
+	echo "set follow-fork-mode child" > /tmp/cardgames-gdb-commands
+	exec gdb -x /tmp/cardgames-gdb-commands --args bin/cardgames $ARGS
 fi	
 
-exec bin/desura $ARGS
+exec bin/cardgames $ARGS
