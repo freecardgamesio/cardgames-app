@@ -4,7 +4,6 @@
 ;
 ;--------------------------------
 
-
 !define MUI_ICON ".\src\branding_cardgames\cardgames.ico"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP ".\src\branding_cardgames\header.bmp"
