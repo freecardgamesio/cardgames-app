@@ -13,7 +13,7 @@ Free Card Games
 
 What is Free Card Games? Card Games is a gaming client application that allows users single-click access to download and install free games. For more information, visit http://github.com/freecardgamesio/cardgames-app/wiki/
 
-This is the OFFICIAL Card Games project, which is the open source project that the commercially maintained Card Games Client Application product is built and distributed from. If you have followed the history of the Card Games Client App project, there is also "Desurium" which can be built for private use and experimentation with new features and/or fixes that you may want to contribute at some point. 
+This is the OFFICIAL Card Games project, which is the open source project that the commercially maintained Card Games Client Application product is built and distributed from. If you have followed the history of the Card Games Client App project, there is also "Cardium" which can be built for private use and experimentation with new features and/or fixes that you may want to contribute at some point. 
 
 While the Card Games App has undergone many iterations presently the project is being managed by the Card Games operators at Bad Juju Games, Inc. This project hasn't had as much attention as it requires on a frequent basis and therefore it is undergoing a major development overhaul. Accordingly, there are a lot of "open" issues that need to be addressed and will be notated and updated here frequently.
 
@@ -24,7 +24,7 @@ For more information regarding licensing of the project, please refer to the LIC
 Build Card Games on Linux  (TODO: Revise Linux Build Instructions)
 ===================
 
-Note: Linux builds are HEAVILY under development, but now that the project is once again GPL v3, we are looking at various parts of the Desurium project for integration into this officially maintained release.  Over time, it is expected that all the better parts of Desurium will be entirely integrated into this release and officially sunset (to avoid any continuing confusion between the projects).
+Note: Linux builds are HEAVILY under development, but now that the project is once again GPL v3, we are looking at various parts of the Cardium project for integration into this officially maintained release.  Over time, it is expected that all the better parts of Cardium will be entirely integrated into this release and officially sunset (to avoid any continuing confusion between the projects).
 
 Dependencies
 ------------
@@ -68,7 +68,7 @@ Third party bundled libraries:
 Installation
 ------------
 
-Open Terminal in Desurium source directory and run:
+Open Terminal in Cardium source directory and run:
 
     ./build_cardgames.sh
 
@@ -84,7 +84,7 @@ or you can build RPM package:
 
     ./build_cardgames.sh pack RPM
 
-Finally run Desurium using:
+Finally run Cardium using:
 
     ./install/cardgames
 
