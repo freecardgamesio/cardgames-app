@@ -1,26 +1,26 @@
 !include "MUI2.nsh"
 
-; Desura.nsi
+; CardGames.nsi
 ;
 ;--------------------------------
 
 
-!define MUI_ICON ".\src\branding_desura\desura.ico"
+!define MUI_ICON ".\src\branding_cardgames\cardgames.ico"
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP ".\src\branding_desura\header.bmp"
+!define MUI_HEADERIMAGE_BITMAP ".\src\branding_cardgames\header.bmp"
 #!define MUI_HEADERIMAGE_RIGHT
 
 ; The name of the installer
-Name "Desura"
+Name "CardGames"
 
 ; The file to write
-OutFile "DesuraInstaller.exe"
+OutFile "CardGamesInstaller.exe"
 
 ; The default installation directory
-InstallDir $PROGRAMFILES\Desura
+InstallDir $PROGRAMFILES\CardGames
 
 ; Registry key to check for directory (so if you install again, it will overwrite the old one automatically)
-InstallDirRegKey HKLM "Software\Desura" "Install_Dir"
+InstallDirRegKey HKLM "Software\CardGames" "Install_Dir"
 
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
@@ -29,9 +29,9 @@ RequestExecutionLevel admin
 
 ; Functions
 
-Function RunDesura
+Function RunCardGames
 SetOutPath $INSTDIR
-Exec "$INSTDIR\desura.exe"
+Exec "$INSTDIR\cardgames.exe"
 FunctionEnd
 
 ; Pages
@@ -42,7 +42,7 @@ FunctionEnd
 
 !define MUI_FINISHPAGE_RUN
 !define MUI_FINISHPAGE_RUN_CHECKED
-!define MUI_FINISHPAGE_RUN_FUNCTION RunDesura
+!define MUI_FINISHPAGE_RUN_FUNCTION RunCardGames
 !insertmacro MUI_PAGE_FINISH
 
 !insertmacro MUI_UNPAGE_CONFIRM
@@ -54,7 +54,7 @@ FunctionEnd
 
 ; The stuff to install
 
-Section "Desura (required)"
+Section "CardGames (required)"
 
   SetShellVarContext all
 
@@ -64,9 +64,9 @@ Section "Desura (required)"
   SetOutPath $INSTDIR
   
   ; Put file there
-  File "build\RelWithDebInfo_Out\desura.exe"
-  File "build\RelWithDebInfo_Out\desura_service.exe"
-  File "build\RelWithDebInfo_Out\Desura_Uninstaller.exe"
+  File "build\RelWithDebInfo_Out\cardgames.exe"
+  File "build\RelWithDebInfo_Out\cardgames_service.exe"
+  File "build\RelWithDebInfo_Out\cardgames_Uninstaller.exe"
   File "build\RelWithDebInfo_Out\dumpgen.exe"
   File "build\RelWithDebInfo_Out\java_launcher.exe"
   File "build\RelWithDebInfo_Out\mcf_util.exe"
@@ -76,17 +76,17 @@ Section "Desura (required)"
   File /r "build\RelWithDebInfo_Out\data"
   
   ; Write the installation path into the registry
-  WriteRegStr HKLM SOFTWARE\Desura "Install_Dir" "$INSTDIR"
+  WriteRegStr HKLM SOFTWARE\CardGames "Install_Dir" "$INSTDIR"
   
   ; Registry key to force proxy off (helpful for some users)
-  WriteRegDWORD HKLM "Software\Desura\DesuraApp" "PrivateProxyOff" 1
+  WriteRegDWORD HKLM "Software\CardGames\CardGamesApp" "PrivateProxyOff" 1
 
   ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Desura" "DisplayName" "Desura"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Desura" "UninstallString" '"$INSTDIR\Desura_Uninstaller.exe"'
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Desura" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Desura" "NoRepair" 1
-  WriteUninstaller "Desura_Uninstaller.exe"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\CardGames" "DisplayName" "CardGames"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\CardGames" "UninstallString" '"$INSTDIR\CardGames_Uninstaller.exe"'
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\CardGames" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\CardGames" "NoRepair" 1
+  WriteUninstaller "CardGames_Uninstaller.exe"
   
 SectionEnd
 
@@ -95,9 +95,9 @@ Section "Start Menu Shortcuts"
 
   SetShellVarContext all
 
-  CreateDirectory "$SMPROGRAMS\Desura"
-  CreateShortcut "$SMPROGRAMS\Desura\Uninstall.lnk" "$INSTDIR\Desura_Uninstaller.exe" "" "$INSTDIR\Desura_Uninstaller.exe" 0
-  CreateShortcut "$SMPROGRAMS\Desura\Desura.lnk" "$INSTDIR\Desura.exe" "" "$INSTDIR\Desura.exe" 0
+  CreateDirectory "$SMPROGRAMS\CardGames"
+  CreateShortcut "$SMPROGRAMS\CardGames\Uninstall.lnk" "$INSTDIR\CardGames_Uninstaller.exe" "" "$INSTDIR\CardGames_Uninstaller.exe" 0
+  CreateShortcut "$SMPROGRAMS\CardGames\CardGames.lnk" "$INSTDIR\CardGames.exe" "" "$INSTDIR\CardGames.exe" 0
   
 SectionEnd
 
@@ -110,17 +110,17 @@ Section "Uninstall"
   SetShellVarContext all
   
   ; Remove registry keys
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Desura"
-  DeleteRegKey HKLM SOFTWARE\Desura
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\CardGames"
+  DeleteRegKey HKLM SOFTWARE\CardGames
 
   ; Remove files and uninstaller
   Delete $INSTDIR\*.*
 
   ; Remove shortcuts, if any
-  Delete "$SMPROGRAMS\Desura\*.*"
+  Delete "$SMPROGRAMS\CardGames\*.*"
 
   ; Remove directories used
-  RMDir "$SMPROGRAMS\Desura"
+  RMDir "$SMPROGRAMS\CardGames"
   RMDir "$INSTDIR"
 
 SectionEnd
