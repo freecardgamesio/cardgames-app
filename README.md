@@ -1,27 +1,27 @@
 Content
 ==================
 
- * Desura
- * Build Desura on Linux
- * Build Desura on Windows
- * Build Desura on Mac
+ * Card Games
+ * Build Card Games on Linux
+ * Build Card Games on Windows
+ * Build Card Games on Mac
  * Special Notes for Advanced Users
  * Closing Remarks
 
-Free games on Desura
+Free Card Games
 ===================
 
-What is free online games on Desura? Desura is a gaming client application that allows users single-click access to download and install free games. For more information, visit http://github.com/desura/desura-app/wiki/
+What is Free Card Games? Card Games is a gaming client application that allows users single-click access to download and install free games. For more information, visit http://github.com/freecardgamesio/cardgames-app/wiki/
 
-This is the OFFICIAL Desura project, which is the open source project that the commercially maintained Desura Client Application product is built and distributed from. If you have followed the history of the Desura Client App project, there is also "Desurium" which can be built for private use and experimentation with new features and/or fixes that you may want to contribute at some point. 
+This is the OFFICIAL Card Games project, which is the open source project that the commercially maintained Card Games Client Application product is built and distributed from. If you have followed the history of the Card Games Client App project, there is also "Desurium" which can be built for private use and experimentation with new features and/or fixes that you may want to contribute at some point. 
 
-While the Desura App has undergone many iterations presently the project is being managed by the Desura operators at Bad Juju Games, Inc. This project hasn't had as much attention as it requires on a frequent basis and therefore it is undergoing a major development overhaul. Accordingly, there are a lot of "open" issues that need to be addressed and will be notated and updated here frequently.
+While the Card Games App has undergone many iterations presently the project is being managed by the Card Games operators at Bad Juju Games, Inc. This project hasn't had as much attention as it requires on a frequent basis and therefore it is undergoing a major development overhaul. Accordingly, there are a lot of "open" issues that need to be addressed and will be notated and updated here frequently.
 
-For more information regarding licensing of the project, please refer to the LICENSE.md file.  However, if you aren't going to read the file; DesuraApp is now officially licensed under the GPL v3 license.
+For more information regarding licensing of the project, please refer to the LICENSE.md file.  However, if you aren't going to read the file; Card Games App is now officially licensed under the GPL v3 license.
 
 
 
-Build Desura on Linux  (TODO: Revise Linux Build Instructions)
+Build Card Games on Linux  (TODO: Revise Linux Build Instructions)
 ===================
 
 Note: Linux builds are HEAVILY under development, but now that the project is once again GPL v3, we are looking at various parts of the Desurium project for integration into this officially maintained release.  Over time, it is expected that all the better parts of Desurium will be entirely integrated into this release and officially sunset (to avoid any continuing confusion between the projects).
@@ -70,33 +70,33 @@ Installation
 
 Open Terminal in Desurium source directory and run:
 
-    ./build_desura.sh
+    ./build_cardgames.sh
 
 or you can speed up things by running:
 
-    ./build_desura.sh -j `getconf _NPROCESSORS_ONLN`
+    ./build_cardgames.sh -j `getconf _NPROCESSORS_ONLN`
 
 or you can build DEB package:
 
-    ./build_desura.sh pack DEB
+    ./build_cardgames.sh pack DEB
 
 or you can build RPM package:
 
-    ./build_desura.sh pack RPM
+    ./build_cardgames.sh pack RPM
 
 Finally run Desurium using:
 
-    ./install/desura
+    ./install/cardgames
 
 or install created DEB or RPM package
 
 For informations on advanced arguments of the build script, run:
 
-    ./build_desura.sh help
+    ./build_cardgames.sh help
 
 
 
-Build Desura on Windows  (TODO: Check for Accuracy)
+Build Card Games on Windows  (TODO: Check for Accuracy)
 =====================
 
 Download and install:
@@ -116,7 +116,7 @@ Note: Make sure you add svn and python to your environment PATH
 
 Open a 32bit cmd.exe with env vars set up by vc or other scripts (so we have a full build environment) and run:
 
-    ./build_desura.bat
+    ./build_cardgames.bat
 
 Wait
 
@@ -125,7 +125,7 @@ Wait
 
 Open a 32bit cmd.exe with env vars set up by vc or other scripts (so we have a full build environment) and run:
 
-    ./build_desura_vis.bat
+    ./build_cardgames_vis.bat
 	
 * Set BUILD_ALL as startup project (should already be set)
 * Confirm that you are set to build either Debug or Release
@@ -133,10 +133,10 @@ Open a 32bit cmd.exe with env vars set up by vc or other scripts (so we have a f
 * Change to editing "All Configurations"
 * Under "Configuration Properties", select "General"
 * Set "Output Directory" to "$(SolutionDir)$(Configuration)_Out\"
-* Set "Target Name" to "desura"
+* Set "Target Name" to "cardgames"
 * Set "Target Extension" to ".exe"
 * Select "Debugging"
-* Set "Command" to "$(SolutionDir)$(Configuration)_Out\desura.exe"
+* Set "Command" to "$(SolutionDir)$(Configuration)_Out\cardgames.exe"
 * Set "Working Directory" to "$(SolutionDir)$(Configuration)_Out\"
 * Select "OK"
 
@@ -155,10 +155,10 @@ To debug/execute under Visual Studio under Windows 7 (further details: http://ms
 
 
 
-Build Desura on Mac  (TODO: Actually Make this Work!)
+Build Card Games on Mac  (TODO: Actually Make this Work!)
 ===================
 
-Note: Mac is currently not a supported platform for the Desura App, but is also under Heavy development. As soon as we have a viable candidate to build and share the Mac Client App Dependencies and Instructions will be posted here to 
+Note: Mac is currently not a supported platform for the Card Games App, but is also under Heavy development. As soon as we have a viable candidate to build and share the Mac Client App Dependencies and Instructions will be posted here to 
 
 Dependencies
 ------------
@@ -175,7 +175,7 @@ Installation
 Special Notes for Advanced Users
 =====================
 
-Desura is using the cmake build system for configuration on project files for several build systems (make, VS, nmake, ...).
+Card Games is using the cmake build system for configuration on project files for several build systems (make, VS, nmake, ...).
 At the top of CMakeFile.txt is a documented list of options
 
 A "normal" way to configure cmake would be something like this:
@@ -197,4 +197,4 @@ A "normal" way to configure cmake would be something like this:
 
 Closing Remarks
 =====================
-Alternatively, you can always send an email to: support@desura.com
+Alternatively, you can always send an email to: support@freecardgames.com
